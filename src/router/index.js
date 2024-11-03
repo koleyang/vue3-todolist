@@ -36,6 +36,7 @@ const routes = [
         meta: {
           title: "全局状态管理",
         },
+        component: StateManagement,
         children: [
           {
             path: '/state-management/state',
@@ -46,7 +47,6 @@ const routes = [
             component: () => import(/* webpackChunkName: "BasicEvent" */ '@/views/StateManagement/State'),
           },
         ],
-        component: StateManagement,
       },
       {
         path: '/lifecycle',
@@ -55,6 +55,16 @@ const routes = [
           title: "生命周期",
         },
         component: Lifecycle,
+        children: [
+          {
+            path: '/lifecycle/state',
+            name: 'Life',
+            meta: {
+              title: "生命周期",
+            },
+            component: () => import(/* webpackChunkName: "BasicEvent" */ '@/views/Lifecycle/Life'),
+          },
+        ],
       },
       {
         path: '/event-bus',
@@ -98,6 +108,24 @@ const routes = [
           title: "element-plus控件",
         },
         component: ElementPlusControls,
+        children: [
+          {
+            path: '/element-plus-controls/table-list',
+            name: 'TableList',
+            meta: {
+              title: "列表组件",
+            },
+            component: () => import(/* webpackChunkName: "TableList" */ '@/views/ElementPlusControls/TableList'),
+          },
+          {
+            path: '/element-plus-controls/form-controls',
+            name: 'FormControls',
+            meta: {
+              title: "表单控件",
+            },
+            component: () => import(/* webpackChunkName: "FormControls" */ '@/views/ElementPlusControls/FormControls'),
+          },
+        ]
       },
     ]
   }
