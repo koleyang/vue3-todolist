@@ -129,6 +129,14 @@ const routes = [
             },
             component: () => import(/* webpackChunkName: "FormControls" */ '@/views/ElementPlusControls/FormControls'),
           },
+          {
+            path: 'tabs-controls',
+            name: 'TabsControls',
+            meta: {
+              title: "Tabs控件动态组件",
+            },
+            component: () => import(/* webpackChunkName: "TabsControls" */ '@/views/ElementPlusControls/TabsControls'),
+          },
         ],
         redirect: '/element-plus-controls/table-list',
       },

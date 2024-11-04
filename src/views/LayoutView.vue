@@ -56,4 +56,7 @@ onUnmounted(() => {
 .el-header {
     padding: 0!important;
 }
+.el-container {
+    height: 100vh;
+}
 </style>

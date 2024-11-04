@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-menu
-        :default-active="activeIndex"
+        :default-active="activeIndex.name"
         class="el-menu-demo"
         mode="horizontal"
         :ellipsis="false"
@@ -15,14 +15,14 @@
                 alt="logo"
             />
         </el-menu-item>
-        <el-menu-item :index="item" v-for="item in menus" :key="item.name">{{ item.meta.title }}</el-menu-item>
+        <el-menu-item :index="item.name" v-for="item in menus" :key="item.name">{{ item.meta.title }}</el-menu-item>
         <!-- <el-menu-item :index="item.name" v-for="item in menuItems" :key="item.name">{{ item.meta.title }}</el-menu-item> -->
     </el-menu>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, defineProps, onMounted, watch, onUnmounted, getCurrentInstance, defineEmits } from 'vue';
+import { ref, computed, defineProps, onMounted, watch, onUnmounted, getCurrentInstance, defineEmits, toRaw } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
 
@@ -61,25 +61,57 @@ const imgpath = require('@/assets/imgs/logo.png');
 // const { menus } = props;
 
 const activeIndex = ref(menus[0]); // 默认选中第一个
-instance.emit('routerChildrenEvent', activeIndex.value.children); // 传出第一个菜单的children给父组件处理
+
 // const activeIndex = ref(menuItems.value[0].name); // 默认选中第一个
 
 const handleSelect = (key, keyPath) => {
     console.log(key, keyPath)
+    const rawMenus = toRaw(menus);
+    rawMenus.forEach(item => {
+        if (item.name === key) {
+            console.log(item)
+            instance.emit('routerChildrenEvent', item.children)  
+            router.push({ name: key });
+        }
+    });
+}
+const findMenuItem = (name) => {
+    let currentItem = null;
     
-    // 先判断key对象里面是否有children属性，如果有则使用自定义事件发射children出去给父组件处理
-    if (key.children) {
-        
-        instance.emit('routerChildrenEvent', key.children);
-    }
-
-    router.push({ name: key.name });
-
+    const rawMenus = toRaw(menus);
+    // instance.emit('routerChildrenEvent', activeIndex.value.children); // 传出第一个菜单的children给父组件处理
+    // 遍历toRaw(menus)再遍历其元素内的children子集，从中找到跟当前路由toRaw(route)中的name匹配的菜单项，然后赋值给activeIndex
+    rawMenus.forEach(item => {
+        if (item.children) {
+            item.children.forEach(child => {
+                if (child.name === name) {
+                    currentItem = item;
+                }
+            });
+        }
+    });
+    return currentItem;
 }
 // 生命周期
 onMounted(() => {
-    console.log('mounted');
-    
+    console.log('mounted HeaderView 当前路由route', toRaw(route));
+    console.log('mounted HeaderView 路由菜单menus', toRaw(menus));
+    const rawRoute = toRaw(route);
+    activeIndex.value = findMenuItem(rawRoute.name);
+    // const rawRoute = toRaw(route);
+    // const rawMenus = toRaw(menus);
+    // // instance.emit('routerChildrenEvent', activeIndex.value.children); // 传出第一个菜单的children给父组件处理
+    // // 遍历toRaw(menus)再遍历其元素内的children子集，从中找到跟当前路由toRaw(route)中的name匹配的菜单项，然后赋值给activeIndex
+    // rawMenus.forEach(item => {
+    //     if (item.children) {
+    //         item.children.forEach(child => {
+    //             if (child.name === rawRoute.name) {
+    //                 activeIndex.value = item;
+    //             }
+    //         });
+    //     }
+    // });
+    instance.emit('routerChildrenEvent', activeIndex.value.children); // 传出刷新后对应菜单的children给父组件处理
     
 });
 // 卸载组件后执行的生命周期
