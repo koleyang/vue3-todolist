@@ -60,7 +60,8 @@ const imgpath = require('@/assets/imgs/logo.png');
 // 从props中解构menus属性
 // const { menus } = props;
 
-const activeIndex = ref(menus[0].name); // 默认选中第一个
+const activeIndex = ref(menus[0]); // 默认选中第一个
+instance.emit('routerChildrenEvent', activeIndex.value.children); // 传出第一个菜单的children给父组件处理
 // const activeIndex = ref(menuItems.value[0].name); // 默认选中第一个
 
 const handleSelect = (key, keyPath) => {
@@ -78,6 +79,7 @@ const handleSelect = (key, keyPath) => {
 // 生命周期
 onMounted(() => {
     console.log('mounted');
+    
     
 });
 // 卸载组件后执行的生命周期

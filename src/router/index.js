@@ -28,7 +28,8 @@ const routes = [
             },
             component: () => import(/* webpackChunkName: "BasicEvent" */ '@/views/GlobalRoutes/BasicRoute'),
           },
-        ]
+        ],
+        redirect: '/global-routes/basic-route',
       },
       {
         path: '/state-management',
@@ -47,6 +48,7 @@ const routes = [
             component: () => import(/* webpackChunkName: "BasicEvent" */ '@/views/StateManagement/State'),
           },
         ],
+        redirect: '/state-management/state',
       },
       {
         path: '/lifecycle',
@@ -65,6 +67,7 @@ const routes = [
             component: () => import(/* webpackChunkName: "BasicEvent" */ '@/views/Lifecycle/Life'),
           },
         ],
+        redirect: '/lifecycle/state',
       },
       {
         path: '/event-bus',
@@ -99,7 +102,8 @@ const routes = [
             },
             component: () => import(/* webpackChunkName: "DynamicComponent" */ '@/views/EventBus/DynamicComponent'),
           },
-        ]
+        ],
+        redirect: '/event-bus/basic-event',
       },
       {
         path: '/element-plus-controls',
@@ -125,7 +129,8 @@ const routes = [
             },
             component: () => import(/* webpackChunkName: "FormControls" */ '@/views/ElementPlusControls/FormControls'),
           },
-        ]
+        ],
+        redirect: '/element-plus-controls/table-list',
       },
     ]
   }

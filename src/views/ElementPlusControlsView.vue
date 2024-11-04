@@ -1,6 +1,5 @@
 <template>
   <div>
-    我是ElementPlusControlsView页面
     <router-view></router-view>
   </div>
 </template>

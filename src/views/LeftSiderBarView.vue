@@ -6,8 +6,9 @@
       @open="handleOpen"
       @close="handleClose"
     >
-      <el-menu-item index="1" v-for="(item, index) in leftItems" :key="index" @click="goToChildrenRoute(item)">
+      <el-menu-item index="1" v-for="(item, index) in menus" :key="index" @click="goToChildrenRoute(item)">
         <el-icon><icon-menu /></el-icon>
+        <!-- <pre>{{ item }}</pre> -->
         <span>{{ item.meta.title }}</span>
       </el-menu-item>
       <!-- <el-menu-item index="1">
@@ -55,13 +56,14 @@ let store = useStore();
 // 得到当前实例
 const instance = getCurrentInstance();
 
-const { leftItems } = defineProps({
+const props = defineProps({
     leftItems: {
         type: Array,
         default: [],
-        required: true,
     },
 })
+
+let menus = ref([]);
 
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath)
@@ -73,9 +75,15 @@ const goToChildrenRoute = (item) => {
   console.log(item)
   router.push({ name: item.name })
 }
+// watch监听leftItems的变化并赋值给menus
+watch(() => props.leftItems, (newVal, oldVal) => {
+  console.log("watch props.leftItems", newVal);
+  menus.value = newVal;
+});
 // 生命周期
 onMounted(() => {
-  console.log("mounted");
+  console.log("mounted props.leftItems", props.leftItems);
+  menus.value = props.leftItems;
 });
 // 卸载组件后执行的生命周期
 onUnmounted(() => {

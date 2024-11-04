@@ -4,7 +4,7 @@
     <event-bus-event></event-bus-event>
     {{ str }}
     <div>{{ receivedMessage }}</div> -->
-    我是事件总线父页面
+    <router-view></router-view>
   </div>
 </template>
 

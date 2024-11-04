@@ -1,6 +1,5 @@
 <template>
   <div>
-    我是生命周期页面
     <router-view></router-view>
   </div>
 </template>

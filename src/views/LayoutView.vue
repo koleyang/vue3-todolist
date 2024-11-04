@@ -25,26 +25,21 @@ import HeaderView from '@/views/HeaderView';
 // 导入左侧边栏组件
 import LeftSiderBar from '@/views/LeftSiderBarView';
 
-
 const router = useRouter();
 const route = useRoute();
-
 let store = useStore();
-
-
-
 // 得到当前实例
 const instance = getCurrentInstance();
 
 // 声明menuItems根据全局路由对象router的options.routes属性来生成, 通过ref()函数创建响应式对象，注意去掉name:'home'的根路由元素
 const menus = ref(router.options.routes[0].children.filter(item => item.name !== 'home').map(item => item));
-let leftItems = [];
+let leftItems = ref([]);
 const routerChildrenEvent = (children) => {
     console.log('layout children', children);
     const rawRouters = toRaw(children);
     console.log('[] => rawRouters', rawRouters)
-    leftItems = rawRouters;
-    
+    leftItems.value = rawRouters;
+    console.log('[] => leftItems.value', leftItems.value)
 }
 
 // 生命周期
@@ -58,5 +53,7 @@ onUnmounted(() => {
 });
 </script>
 <style lang="scss">
-
+.el-header {
+    padding: 0!important;
+}
 </style>

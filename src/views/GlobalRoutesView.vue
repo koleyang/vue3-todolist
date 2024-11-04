@@ -1,6 +1,5 @@
 <template>
   <div>
-    我是全局路由页面
     <router-view></router-view>
   </div>
 </template>

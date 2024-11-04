@@ -31,6 +31,12 @@ const gotoCustomEvent = () => {
 };
 </script>
 <style lang="scss">
+/* 设置html、body或*边距补白为0 */
+html, body, * {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -51,4 +57,5 @@ nav {
     }
   }
 }
+
 </style>
