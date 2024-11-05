@@ -1,12 +1,12 @@
 <template>
   <div>
     <el-menu
-      default-active="1"
+      :default-active="activeIndex"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
     >
-      <el-menu-item index="1" v-for="(item, index) in menus" :key="index" @click="goToChildrenRoute(item)">
+      <el-menu-item :index="toRaw(item).name" v-for="(item, index) in menus" :key="index" @click="goToChildrenRoute(item)">
         <el-icon><icon-menu /></el-icon>
         <!-- <pre>{{ item }}</pre> -->
         <span>{{ item.meta.title }}</span>
@@ -37,6 +37,7 @@ import {
   onUnmounted,
   getCurrentInstance,
   defineEmits,
+  toRaw,
 } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
@@ -64,6 +65,7 @@ const props = defineProps({
 })
 
 let menus = ref([]);
+let activeIndex = ref(toRaw(route).name); // 激活的菜单索引
 
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath)
@@ -72,18 +74,24 @@ const handleClose = (key, keyPath) => {
   console.log(key, keyPath)
 }
 const goToChildrenRoute = (item) => {
-  console.log(item)
+  console.log('子菜单栏对象item', toRaw(item))
+  console.log('当前路由对象对象route', toRaw(route))
   router.push({ name: item.name })
 }
 // watch监听leftItems的变化并赋值给menus
 watch(() => props.leftItems, (newVal, oldVal) => {
-  console.log("watch props.leftItems", newVal);
-  menus.value = newVal;
+  console.log("watch props.leftItems 新值new ", toRaw(newVal));
+  console.log("watch props.leftItems 旧值old", toRaw(oldVal));
+  menus.value = newVal; // 监听赋值
+  activeIndex.value = toRaw(route).name;
+  // activeIndex.value = toRaw(menus.value[0]).name;
 });
 // 生命周期
 onMounted(() => {
   console.log("mounted props.leftItems", props.leftItems);
-  menus.value = props.leftItems;
+  menus.value = props.leftItems; // 初始化赋值
+  // activeIndex.value = toRaw(route).name;
+
 });
 // 卸载组件后执行的生命周期
 onUnmounted(() => {
