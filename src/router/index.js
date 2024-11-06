@@ -137,6 +137,14 @@ const routes = [
             },
             component: () => import(/* webpackChunkName: "TabsControls" */ '@/views/ElementPlusControls/TabsControls'),
           },
+          {
+            path: 'time-line-controls',
+            name: 'TimeLineControls',
+            meta: {
+              title: "TimeLine时间轴控件",
+            },
+            component: () => import(/* webpackChunkName: "TimeLineControls" */ '@/views/ElementPlusControls/TimeLineControls'),
+          },
         ],
         redirect: '/element-plus-controls/table-list',
       },

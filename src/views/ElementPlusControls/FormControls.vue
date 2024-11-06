@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form ref="ruleFormRef" :model="form" :rules="rules" label-width="auto" style="max-width: 600px">
-      <el-form-item label="Activity name" prop="name">
+      <el-form-item label="Activity name" prop="name"> <!-- prop="name" 表示验证规则的字段 不能少-->
         <el-input v-model="form.name" />
       </el-form-item>
       <el-form-item label="Activity zone" prop="region">
