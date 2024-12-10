@@ -26,7 +26,7 @@ const routes = [
             meta: {
               title: "基础路由",
             },
-            component: () => import(/* webpackChunkName: "BasicEvent" */ '@/views/GlobalRoutes/BasicRoute'),
+            component: () => import(/* webpackChunkName: "BasicRoute" */ '@/views/GlobalRoutes/BasicRoute'),
           },
         ],
         redirect: '/global-routes/basic-route',
@@ -45,7 +45,7 @@ const routes = [
             meta: {
               title: "状态管理",
             },
-            component: () => import(/* webpackChunkName: "BasicEvent" */ '@/views/StateManagement/State'),
+            component: () => import(/* webpackChunkName: "State" */ '@/views/StateManagement/State'),
           },
         ],
         redirect: '/state-management/state',
@@ -64,7 +64,7 @@ const routes = [
             meta: {
               title: "生命周期",
             },
-            component: () => import(/* webpackChunkName: "BasicEvent" */ '@/views/Lifecycle/Life'),
+            component: () => import(/* webpackChunkName: "Life" */ '@/views/Lifecycle/Life'),
           },
         ],
         redirect: '/lifecycle/state',
@@ -147,6 +147,79 @@ const routes = [
           },
         ],
         redirect: '/element-plus-controls/table-list',
+      },
+      {
+        path: '/component-management',
+        name: 'ComponentManagement',
+        meta: {
+          title: "组件封装",
+        },
+        component: () => import(/* webpackChunkName: "ComponentManagement" */ '@/views/ComponentManagementView'),
+        children: [
+          {
+            path: '/component-management/slot',
+            name: 'Slot',
+            meta: {
+              title: "插槽",
+            },
+            component: () => import(/* webpackChunkName: "ComponentManagement" */ '@/views/ComponentManagement/Slot'),
+          },
+        ],
+        redirect: '/component-management/slot',
+      },
+      {
+        path: '/animate-management',
+        name: 'AnimateManagement',
+        meta: {
+          title: "vue3动画",
+        },
+        component: () => import(/* webpackChunkName: "AnimateManagement" */ '@/views/AnimateManagementView'),
+        children: [
+          {
+            path: '/animate-management/animate',
+            name: 'animate',
+            meta: {
+              title: "关键帧和过渡",
+            },
+            component: () => import(/* webpackChunkName: "animate" */ '@/views/AnimateManagement/Animate'),
+          },
+          {
+            path: '/animate-management/transition',
+            name: 'transition',
+            meta: {
+              title: "transition标签类",
+            },
+            component: () => import(/* webpackChunkName: "transition" */ '@/views/AnimateManagement/Transition'),
+          },
+        ],
+        redirect: '/animate-management/animate',
+      },
+      {
+        path: '/advanced-management',
+        name: 'AdvancedManagement',
+        meta: {
+          title: "vue3高级进阶",
+        },
+        component: () => import(/* webpackChunkName: "AdvancedManagement" */ '@/views/AdvancedManagementView'),
+        children: [
+          {
+            path: '/advanced-management/dynamicbinding',
+            name: 'dynamicbinding',
+            meta: {
+              title: "动态绑定属性名和方法",
+            },
+            component: () => import(/* webpackChunkName: "dynamic" */ '@/views/AdvancedManagement/dynamicbinding'),
+          },
+          {
+            path: '/advanced-management/context',
+            name: 'context',
+            meta: {
+              title: "context参数attrs、slots、emit参数研究",
+            },
+            component: () => import(/* webpackChunkName: "context" */ '@/views/AdvancedManagement/context'),
+          },
+        ],
+        redirect: '/advanced-management/dynamicbinding',
       },
     ]
   }

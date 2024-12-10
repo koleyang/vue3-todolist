@@ -1,16 +1,15 @@
 <template>
   <div>
-    我是State组件
-    TODOLIST：
-    <home-view />
+    我是插值消息头部
+    <slot name="content"></slot>
+    我是插值消息尾部
   </div>
 </template>
 
 <script setup>
-import { ref, computed, defineProps, onMounted, watch, onUnmounted, getCurrentInstance, defineEmits } from 'vue';
+import { ref, computed, defineProps, onMounted, watch, onUnmounted, getCurrentInstance, defineEmits, toRaw, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
-import HomeView from '@/views/HomeView'
 
 const router = useRouter();
 const route = useRoute();
@@ -18,7 +17,7 @@ const route = useRoute();
 let store = useStore();
 
 const props = defineProps({
-    // msg: { type: String },
+    msg: { type: String },
 });
 // 得到当前实例
 const instance = getCurrentInstance();
@@ -27,7 +26,6 @@ const instance = getCurrentInstance();
 // 生命周期
 onMounted(() => {
     console.log('mounted');
-    
 });
 // 卸载组件后执行的生命周期
 onUnmounted(() => {

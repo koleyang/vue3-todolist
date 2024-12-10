@@ -1,8 +1,7 @@
 <template>
   <div>
-    我是State组件
-    TODOLIST：
-    <home-view />
+    我是vue3高级技巧进阶页面
+    <router-view></router-view>
   </div>
 </template>
 
@@ -10,16 +9,13 @@
 import { ref, computed, defineProps, onMounted, watch, onUnmounted, getCurrentInstance, defineEmits } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
-import HomeView from '@/views/HomeView'
 
 const router = useRouter();
 const route = useRoute();
 
 let store = useStore();
 
-const props = defineProps({
-    // msg: { type: String },
-});
+
 // 得到当前实例
 const instance = getCurrentInstance();
 

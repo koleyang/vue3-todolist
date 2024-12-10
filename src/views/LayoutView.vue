@@ -5,7 +5,7 @@
             <header-view :menus="menus" @routerChildrenEvent="routerChildrenEvent"></header-view>
         </el-header>
         <el-container>
-            <el-aside width="200px">
+            <el-aside width="320px">
                 <left-sider-bar :leftItems="leftItems"></left-sider-bar>
             </el-aside>
             <el-main>

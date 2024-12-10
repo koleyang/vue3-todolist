@@ -1,16 +1,13 @@
 <template>
   <div>
-    我是State组件
-    TODOLIST：
-    <home-view />
+    <slot></slot>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, defineProps, onMounted, watch, onUnmounted, getCurrentInstance, defineEmits } from 'vue';
+import { ref, computed, defineProps, onMounted, watch, onUnmounted, getCurrentInstance, defineEmits, toRaw } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
-import HomeView from '@/views/HomeView'
 
 const router = useRouter();
 const route = useRoute();
@@ -18,7 +15,7 @@ const route = useRoute();
 let store = useStore();
 
 const props = defineProps({
-    // msg: { type: String },
+    msg: { type: String },
 });
 // 得到当前实例
 const instance = getCurrentInstance();
